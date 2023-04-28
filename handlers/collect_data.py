@@ -46,16 +46,16 @@ class CollectDataHandler(BaseHandler):
             'ASIN': self.asin,
             'Cost': cost,
             'Total Units': periods[0].units,
-            'Total Sales $': periods[0].sales,
-            'Profit Total $': periods[0].net_profit,
-            'PPC Units': periods[0].units_ppc,
-            'Spend+Tax $': periods[0].advertising,
             'Sessions': sessions,
+            'Total Sales $': periods[0].sales,
+            'Profit Total': periods[0].net_profit,
+            'PPC Units': periods[0].units_ppc,
             'Impressions': adverting.summary.impressions,
             'Clicks': adverting.summary.clicks,
             'Orders': adverting.summary.orders,
             'Sales $': adverting.summary.sales.dollars,
-            'Spend $': adverting.summary.spend.dollars
+            'Spend $': adverting.summary.spend.dollars,
+            'Spend+Tax $': periods[0].advertising,
         }
 
     def _collect_adverting_data(self):
