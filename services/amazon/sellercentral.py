@@ -59,4 +59,6 @@ class SellerCentralService(BaseService):
             if i[1] == asin:
                 return i[8]
             else:
-                raise NoASINInSellerCentral
+                continue
+
+        raise NoASINInSellerCentral

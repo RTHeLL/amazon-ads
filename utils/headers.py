@@ -76,6 +76,7 @@ SELLER_CENTRAL_HEADERS = {
     'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
     'content-type': 'application/json',
     'origin': 'https://sellercentral.amazon.com',
+    'referer': 'https://sellercentral.amazon.com/business-reports',
     'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
