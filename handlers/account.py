@@ -21,7 +21,7 @@ class AccountHandler(BaseHandler):
     @staticmethod
     def _create():
         Account(
-            name=input('Введите название аккаунта'),
+            name=input('Введите название аккаунта: '),
             session_id=input('Введите ssesion_id: '),
             ubid_main=input('Введите ubid_main: '),
             at_main=input('Введите at_main: '),
