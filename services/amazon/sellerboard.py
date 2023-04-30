@@ -1,7 +1,4 @@
-import datetime
-from typing import Tuple, Optional
-
-from datetime_periods import period
+from typing import Optional
 
 from models.sellerboard import Period, EntriesData
 from services import BaseService
@@ -9,53 +6,11 @@ from utils.headers import SELLER_BOARD_ENTRIES_HEADERS
 from utils.urls import SELLER_BOARD_ENTRIES_URL, SELLER_BOARD_PERIODS_URL
 
 
-def get_last_week_date_range() -> Tuple[int, int]:
-    now = datetime.datetime.utcnow()
-    last_week_period = period(now - datetime.timedelta(days=7), 'week')
-
-    start_last_week_timestamp = int(
-        datetime.datetime.timestamp(last_week_period[0].replace(tzinfo=datetime.timezone.utc))
-    )
-    end_last_week_timestamp = int(
-        datetime.datetime.timestamp(last_week_period[1].replace(tzinfo=datetime.timezone.utc))
-    )
-
-    return start_last_week_timestamp, end_last_week_timestamp
-
-
-def get_last_moth_date_range() -> Tuple[int, int]:
-    now = datetime.datetime.utcnow()
-    first_day = now.replace(day=1)
-
-    last_month = first_day - datetime.timedelta(days=1)
-    last_month_period = period(last_month, 'month')
-
-    datetime.datetime.timestamp(last_month_period[0].replace(tzinfo=datetime.timezone.utc))
-
-    start_last_month_timestamp = int(
-        datetime.datetime.timestamp(last_month_period[0].replace(tzinfo=datetime.timezone.utc))
-    )
-    end_last_month_timestamp = int(
-        datetime.datetime.timestamp(last_month_period[1].replace(tzinfo=datetime.timezone.utc))
-    )
-
-    return start_last_month_timestamp, end_last_month_timestamp
-
-
-PERIODS = {
-    'last_week': ('Прошлая неделя', get_last_week_date_range),
-    'last_month': ('Прошлый месяц', get_last_moth_date_range)
-}
-
-
 class SellerBoardService(BaseService):
-    def get_periods(self, asin: str, period_: str):
-        period_start, period_end = PERIODS[period_][1]()
+    def get_periods(self, asin: str, period_start: int, period_end: int):
         return self.__get_periods(asin=asin, period_start=period_start, period_end=period_end)
 
-    def get_cost(self, asin: str, period_: str) -> Optional[float]:
-        period_start, period_end = PERIODS[period_][1]()
-
+    def get_cost(self, asin: str, period_start: int, period_end: int) -> Optional[float]:
         entries_response = self.__get_entries_with_retry(asin=asin, period_start=period_start, period_end=period_end)
 
         if not entries_response or not entries_response.entries:
