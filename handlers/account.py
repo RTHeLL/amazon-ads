@@ -27,7 +27,6 @@ class AccountHandler(BaseHandler):
             at_main=input('Введите at_main: '),
             sst_main=input('Введите sst_main: '),
             host_mselc=input('Введите host_mselc: '),
-            rmbrm=input('Введите rmbrm: '),
             phpsesid=input('Введите phpsesid: ')
         ).create()
         print('Аккаунт успешно добавлен!')

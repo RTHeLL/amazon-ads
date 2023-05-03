@@ -12,7 +12,6 @@ class Account:
             at_main: str,
             sst_main: str,
             host_mselc: str,
-            rmbrm: str,
             phpsesid: str,
             id_: Optional[int] = None,
     ) -> None:
@@ -24,12 +23,10 @@ class Account:
         self.at_main = at_main
         self.sst_main = sst_main
         self.host_mselc = host_mselc
-        self.rmbrm = rmbrm
         self.phpsesid = phpsesid
 
     def get_seller_board_cookies(self) -> Dict[str, str]:
         return {
-            'RMBRM': self.rmbrm,
             'PHPSESSID': self.phpsesid
         }
 
@@ -70,7 +67,6 @@ class Account:
             'at_main': self.at_main,
             'sst_main': self.sst_main,
             'host_mselc': self.host_mselc,
-            'rmbrm': self.rmbrm,
             'phpsesid': self.phpsesid
         }
 
