@@ -27,7 +27,9 @@ class AccountHandler(BaseHandler):
             at_main=input('Введите at_main: '),
             sst_main=input('Введите sst_main: '),
             host_mselc=input('Введите host_mselc: '),
-            phpsesid=input('Введите phpsesid: ')
+            seller_board_name=input('Введите название аккаунт в SellerBoard: '),
+            seller_board_username=input('Введите логин от SellerBoard: '),
+            seller_board_password=input('Введите пароль от SellerBoard: ')
         ).create()
         print('Аккаунт успешно добавлен!')
 

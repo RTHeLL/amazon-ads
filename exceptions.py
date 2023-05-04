@@ -20,3 +20,7 @@ class NoASINInSellerCentral(Exception):
 
 class InvalidSellerCentralAuth(Exception):
     pass
+
+
+class NoAccountInSellerBoard(Exception):
+    pass

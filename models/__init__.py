@@ -1,5 +1,6 @@
 from typing import Dict, Any, Optional
 
+from exceptions import UnauthorizedException, NoAccountInSellerBoard
 from settings import DATABASE
 
 
@@ -12,7 +13,10 @@ class Account:
             at_main: str,
             sst_main: str,
             host_mselc: str,
-            phpsesid: str,
+            seller_board_name: str,
+            seller_board_username: str,
+            seller_board_password: str,
+            phpsesid: Optional[str] = None,
             id_: Optional[int] = None,
     ) -> None:
         self.id = id_
@@ -24,6 +28,9 @@ class Account:
         self.sst_main = sst_main
         self.host_mselc = host_mselc
         self.phpsesid = phpsesid
+        self.seller_board_name = seller_board_name
+        self.seller_board_username = seller_board_username
+        self.seller_board_password = seller_board_password
 
     def get_seller_board_cookies(self) -> Dict[str, str]:
         return {
@@ -49,6 +56,7 @@ class Account:
         DATABASE.updateById(self.id, self._get_data_dict())
 
     def create(self):
+        self.auth()
         DATABASE.add(self._get_data_dict())
 
     def delete(self):
@@ -57,6 +65,23 @@ class Account:
     @staticmethod
     def all():
         return [Account(**i) for i in DATABASE.getAll()]
+
+    def auth(self):
+        from services.amazon.auth.sellerboard import SellerBoardAuthService
+
+        auth_service = SellerBoardAuthService(self)
+
+        while True:
+            try:
+                self.phpsesid = auth_service.auth()
+                break
+            except UnauthorizedException:
+                print('Ошибка авторизации в SellerBoard. Введите корректные данные!')
+                self.seller_board_username = input('Введите логин от SellerBoard: ')
+                self.seller_board_password = input('Введите пароль от SellerBoard: ')
+            except NoAccountInSellerBoard:
+                print(f'Аккаунт с названмем <{self.seller_board_name}> не найден в введнном аккаунте SellerBoard')
+                self.seller_board_name = input('Введите название аккаунт в SellerBoard: ')
 
     def _get_data_dict(self) -> Dict[str, Any]:
         return {
@@ -67,6 +92,9 @@ class Account:
             'at_main': self.at_main,
             'sst_main': self.sst_main,
             'host_mselc': self.host_mselc,
+            'seller_board_name': self.seller_board_name,
+            'seller_board_username': self.seller_board_username,
+            'seller_board_password': self.seller_board_password,
             'phpsesid': self.phpsesid
         }
 

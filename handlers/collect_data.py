@@ -32,15 +32,15 @@ class CollectDataHandler(BaseHandler):
         adverting = self._collect_adverting_data()
         periods, cost = self._collect_seller_board_data()
 
-        try:
-            sessions = self._collect_seller_central_data()
-        except InvalidSellerCentralAuth:
-            print('У вас устарели данные от SellerCentral')
-            self.app.selected_account.at_main = input('Введите at_main для SellerCentral аккаунта: ')
-            self.app.selected_account.host_mselc = input('Введите host_mselc для SellerCentral аккаунта: ')
-            self.app.selected_account.save()
-            print('Данные успешно обновлены, запустите сбор данных еще раз!')
-            return
+        while True:
+            try:
+                sessions = self._collect_seller_central_data()
+                break
+            except InvalidSellerCentralAuth:
+                print('У вас устарели данные от SellerCentral')
+                self.app.selected_account.at_main = input('Введите at_main для SellerCentral аккаунта: ')
+                self.app.selected_account.host_mselc = input('Введите host_mselc для SellerCentral аккаунта: ')
+                self.app.selected_account.save()
 
         return {
             'ASIN': self.asin,
@@ -106,6 +106,9 @@ class CollectDataHandler(BaseHandler):
         }
 
     def _collect_seller_board_data(self):
+        self.app.selected_account.auth()
+        self.app.selected_account.save()
+
         seller_board_service = SellerBoardService(account=self.app.selected_account)
 
         end_date = self.end_date.replace(hour=23, minute=59, second=59)

@@ -36,6 +36,115 @@ ADVERTING_API_HEADERS = {
                   'Chrome/112.0.0.0 Safari/537.36'
 }
 
+SELLER_BOARD_LOGIN_PAGE_HEADERS = {
+    "accept": "text/html,"
+              "application/xhtml+xml,"
+              "application/xml;q=0.9,"
+              "image/avif,"
+              "image/webp,"
+              "image/apng,/;q=0.8,"
+              "application/signed-exchange;v=b3;q=0.7",
+    "accept-encoding": "gzip, deflate, br",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "connection": "keep-alive",
+    "host": "app.sellerboard.com",
+    "sec-ch-ua": '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
+    "sec-fetch-user": "?1",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/112.0.0.0 Safari/537.36"
+}
+
+SELLER_BOARD_LOGIN_AUTH_HEADERS = {
+    "accept": "text/html,"
+              "application/xhtml+xml,"
+              "application/xml;q=0.9,"
+              "image/avif,"
+              "image/webp,"
+              "image/apng,/;q=0.8,"
+              "application/signed-exchange;v=b3;q=0.7",
+    "accept-encoding": "gzip, deflate, br",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "max-age=0",
+    "connection": "keep-alive",
+    "content-length": "201",
+    "content-type": "application/x-www-form-urlencoded",
+    "host": "app.sellerboard.com",
+    "origin": "https://app.sellerboard.com",
+    "referer": "https://app.sellerboard.com/en/auth/login",
+    "sec-ch-ua": '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "same-origin",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/112.0.0.0 Safari/537.36"
+}
+
+SELLER_BOARD_SWITCH_ACCOUNT_HEADERS = {
+    'accept': "text/html,"
+              "application/xhtml+xml,"
+              "application/xml;q=0.9,"
+              "image/avif,"
+              "image/webp,"
+              "image/apng,"
+              "*/*;q=0.8,"
+              "application/signed-exchange;v=b3;q=0.7",
+    'authority': "app.sellerboard.com",
+    'accept-language': "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    'cache-control': "max-age=0",
+    'content-type': "application/x-www-form-urlencoded",
+    'origin': "https://app.sellerboard.com",
+    'referer': "https://app.sellerboard.com/ru/dashboard/",
+    'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+    'sec-ch-ua-mobile': "?0",
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': "document",
+    'sec-fetch-mode': "navigate",
+    'sec-fetch-site': "same-origin",
+    'sec-fetch-user': "?1",
+    'upgrade-insecure-requests': "1",
+    'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/112.0.0.0 Safari/537.36",
+}
+
+SELLER_BOARD_DASHBOARD_HEADERS = {
+    'accept': "text/html,"
+              "application/xhtml+xml,"
+              "application/xml;q=0.9,"
+              "image/avif,"
+              "image/webp,"
+              "image/apng,"
+              "*/*;q=0.8,"
+              "application/signed-exchange;v=b3;q=0.7",
+    'authority': "app.sellerboard.com",
+    'accept-language': "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    'cache-control': "no-cache",
+    'pragma': "no-cache",
+    'referer': "https://app.sellerboard.com/ru/dashboard/",
+    'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+    'sec-ch-ua-mobile': "?0",
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': "document",
+    'sec-fetch-mode': "navigate",
+    'sec-fetch-site': "same-origin",
+    'sec-fetch-user': "?1",
+    'upgrade-insecure-requests': "1",
+    'user-agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/112.0.0.0 Safari/537.36",
+}
+
 SELLER_BOARD_ENTRIES_HEADERS = {
     'authority': 'app.sellerboard.com',
     'accept': '*/*',
