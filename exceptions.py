@@ -24,3 +24,7 @@ class InvalidSellerCentralAuth(Exception):
 
 class NoAccountInSellerBoard(Exception):
     pass
+
+
+class NoCSRFToken(Exception):
+    pass

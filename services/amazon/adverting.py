@@ -1,6 +1,7 @@
 import datetime
 import re
 
+from exceptions import NoCSRFToken
 from models.adverting import CampaignsData
 from services import BaseService
 from utils.headers import ADVERTING_API_HEADERS, ADVERTING_HEADERS
@@ -81,7 +82,7 @@ class AdvertingService(BaseService):
         csrf_token_re = re.findall(r'csrfToken: .*', response.text)
 
         if not csrf_token_re:
-            raise ValueError('no csrf token in response')
+            raise NoCSRFToken('no csrf token in response')
 
         return csrf_token_re[0].replace('"', '').replace(',', '').split(' ')[1]
 

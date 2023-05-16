@@ -1,7 +1,7 @@
 import datetime
 from typing import Any, Dict, Optional
 
-from exceptions import InvalidSellerCentralAuth
+from exceptions import InvalidSellerCentralAuth, NoCSRFToken
 from handlers import BaseHandler
 from services.amazon.adverting import AdvertingService
 from services.amazon.sellerboard import SellerBoardService
@@ -29,7 +29,18 @@ class CollectDataHandler(BaseHandler):
         return self.actions[action][1]()
 
     def collect_all_data(self) -> Optional[Dict[str, Any]]:
-        adverting = self._collect_adverting_data()
+        while True:
+            try:
+                adverting = self._collect_adverting_data()
+                break
+            except NoCSRFToken:
+                print('У вас устарели данные от Adverting')
+                self.app.selected_account.at_main = input('Введите at_main для Adverting аккаунта: ')
+                self.app.selected_account.sst_main = input('Введите sst_main для Adverting аккаунта: ')
+                self.app.selected_account.session_id = input('Введите session_id для Adverting аккаунта: ')
+                self.app.selected_account.ubid_main = input('Введите ubid_main для Adverting аккаунта: ')
+                self.app.selected_account.save()
+
         periods, cost = self._collect_seller_board_data()
 
         while True:
