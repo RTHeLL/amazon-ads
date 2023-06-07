@@ -17,6 +17,8 @@ class Account:
             seller_board_username: str,
             seller_board_password: str,
             phpsesid: Optional[str] = None,
+            rmbrm: Optional[str] = None,
+            sid: Optional[str] = None,
             id_: Optional[int] = None,
     ) -> None:
         self.id = id_
@@ -28,13 +30,17 @@ class Account:
         self.sst_main = sst_main
         self.host_mselc = host_mselc
         self.phpsesid = phpsesid
+        self.rmbrm = rmbrm
+        self.sid = sid
         self.seller_board_name = seller_board_name
         self.seller_board_username = seller_board_username
         self.seller_board_password = seller_board_password
 
     def get_seller_board_cookies(self) -> Dict[str, str]:
         return {
-            'PHPSESSID': self.phpsesid
+            'PHPSESSID': self.phpsesid,
+            'RMBRM': self.rmbrm,
+            'sid': self.sid
         }
 
     def get_seller_central_cookies(self) -> Dict[str, str]:
@@ -73,7 +79,7 @@ class Account:
 
         while True:
             try:
-                self.phpsesid = auth_service.auth()
+                self.phpsesid, self.rmbrm, self.sid = auth_service.auth()
                 break
             except UnauthorizedException:
                 print('Ошибка авторизации в SellerBoard. Введите корректные данные!')
@@ -95,7 +101,9 @@ class Account:
             'seller_board_name': self.seller_board_name,
             'seller_board_username': self.seller_board_username,
             'seller_board_password': self.seller_board_password,
-            'phpsesid': self.phpsesid
+            'phpsesid': self.phpsesid,
+            'rmbrm': self.rmbrm,
+            'sid': self.sid
         }
 
     def __str__(self):

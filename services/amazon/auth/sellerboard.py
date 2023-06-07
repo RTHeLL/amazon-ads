@@ -13,7 +13,7 @@ class SellerBoardAuthService:
         self.account = account
         self.session = requests.Session()
 
-    def auth(self) -> str:
+    def auth(self) -> tuple:
         hidden_fields = self._get_hidden_fields_on_login_page()
 
         data = {
@@ -39,11 +39,13 @@ class SellerBoardAuthService:
 
         cookies = self.session.cookies.get_dict()
         phpsesid = cookies.get('PHPSESSID')
+        rmbrm = cookies.get('RMBRM')
+        sid = cookies.get('sid')
 
-        if not phpsesid:
-            raise ValueError(f'Bad auth in SellerBoard. No PHPSESID in cookeis {cookies}')
+        if all([phpsesid, rmbrm, sid]):
+            raise ValueError(f'Bad auth in SellerBoard. No PHPSESID, RMBRM or sid in cookeis {cookies}')
 
-        return phpsesid
+        return phpsesid, rmbrm, sid
 
     def _get_hidden_fields_on_login_page(self):
         response = self.session.get(SELLER_BOARD_LOGIN_URL, headers=SELLER_BOARD_LOGIN_PAGE_HEADERS)
