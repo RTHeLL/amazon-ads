@@ -48,6 +48,7 @@ class Account:
             'ubid-main': self.ubid_main,
             '__Host-mselc': self.host_mselc,
             'at-main': self.at_main,
+            'session-id': self.session_id
         }
 
     def get_adverting_cookies(self) -> Dict[str, str]:
